@@ -1,0 +1,14 @@
+<div class="input-group">
+  <input
+    [type]="type"
+    [name]="name"
+    [placeholder]="placeholder"
+    [value]="value"
+    (input)="onInput($event)"
+    (blur)="onBlur()"
+    [disabled]="disabled"
+  >
+  <div class="error-message" *ngIf="isInvalid">
+    {{ getErrorMessage() }}
+  </div>
+</div>

@@ -1,0 +1,296 @@
+/* صفحه اصلی */
+.profile-page {
+  width: 100%;
+  min-height: 100%;
+  background: #f5f7fa;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+/* هدر */
+.profile-header {
+  margin-bottom: 24px;
+}
+
+.panel-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 0 0 8px 0;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+/* محتوای اصلی */
+.profile-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* فرم */
+.profile-form {
+  background: white;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ردیف دو ستونه */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* گروه ورودی */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-group.full-width {
+  grid-column: span 2;
+}
+
+.input-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.input-group label svg {
+  stroke: var(--primary-orange);
+}
+
+.input-group .optional {
+  font-size: 0.7rem;
+  font-weight: normal;
+  color: #6c757d;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid #e9ecef;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  outline: none;
+  background: #f8f9fa;
+  font-family: inherit;
+  color: #333;
+}
+
+.input-group input:hover {
+  border-color: #ced4da;
+}
+
+.input-group input:focus {
+  border-color: #ff5722;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(255, 87, 34, 0.1);
+}
+
+.input-group input.is-invalid {
+  border-color: #dc3545;
+  background: #fff8f8;
+}
+
+.input-group input.is-invalid:focus {
+  box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.1);
+}
+
+.input-group input::placeholder {
+  color: #adb5bd;
+  font-size: 0.85rem;
+}
+
+/* پیام خطا */
+.error-message {
+  font-size: 0.7rem;
+  color: #dc3545;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.error-message::before {
+  content: "⚠️";
+  font-size: 0.65rem;
+}
+
+/* متن راهنما */
+.hint-text {
+  font-size: 0.7rem;
+  color: #6c757d;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f8f9fa;
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+
+.hint-text svg {
+  stroke: #6c757d;
+}
+
+/* دکمه‌ها */
+.form-actions {
+  margin-top: 32px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-submit {
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 160px;
+}
+
+.btn-submit svg {
+  stroke: white;
+}
+
+.btn-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 26, 46, 0.3);
+  background: linear-gradient(135deg, #ff5722 0%, #ff8a50 100%);
+}
+
+.btn-submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* اسپینر */
+.spinner-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .profile-page {
+    padding: 15px;
+  }
+
+  .profile-form {
+    padding: 24px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .input-group.full-width {
+    grid-column: span 1;
+  }
+
+  .form-actions {
+    justify-content: center;
+  }
+
+  .btn-submit {
+    width: 100%;
+    padding: 12px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-page {
+    padding: 10px;
+  }
+
+  .profile-form {
+    padding: 16px;
+  }
+
+  .input-group input {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+
+  .input-group label {
+    font-size: 0.8rem;
+  }
+
+  .btn-submit {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+    min-width: 140px;
+  }
+
+  .hint-text {
+    font-size: 0.65rem;
+    padding: 6px 10px;
+  }
+}
+
+/* اسکرول‌بار سفارشی */
+.profile-page::-webkit-scrollbar {
+  width: 6px;
+}
+
+.profile-page::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.profile-page::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+.profile-page::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

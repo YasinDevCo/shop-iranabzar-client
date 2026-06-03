@@ -1,0 +1,99 @@
+
+section {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+main {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+header {
+  width: 100%;
+  height: 60px;
+  padding: 10px 20px;
+  /*margin: 20px 0;*/
+  background: var(--primary-dark);
+  color: var(--gray-lightest);
+  display: flex;
+  align-items: center;
+}
+.hambermenue{
+  width: 25px;
+  height: 25px;
+}
+.sidebar-dashboard {
+  width: 20%;
+  height: 100vh;
+  background: var(--primary-dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.sidebar-dashboard .top {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar-dashboard .logo {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-lightest);
+
+}
+
+.sidebar-dashboard .menu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.menu .menuItem {
+  width: 100%;
+  padding: 10px;
+  color: #b1afaf;
+  background: transparent;
+  font-size: .8rem;
+  display: flex;
+
+}
+
+.menu .menuItem:hover {
+  /*background: rgba(59, 59, 59, 0.88);*/
+  color: var(--gray-lightest);
+
+}
+
+.menu .menuItem.active {
+  /*background: rgba(255, 80, 35, 0.57);*/
+  color: var(--gray-lightest);
+  font-weight: 800;
+
+}
+
+.sidebar-dashboard .footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.main-dashboard {
+  width: calc(100% - 5px);
+  min-height: calc(100vh - 20px - 60px - 5px - 10px - 20px);
+  background: var(--gray-lightest);
+  padding: 20px;
+  margin-right: 5px;
+  margin-top: 5px;
+}

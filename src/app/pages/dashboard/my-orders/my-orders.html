@@ -1,0 +1,97 @@
+<div class="orders-container">
+  <div class="page-header">
+    <h3 class="panel-title">سفارشات من</h3>
+  </div>
+
+  <div class="filter-bar">
+    <select class="status-filter" [(ngModel)]="selectedStatus" (change)="onStatusChange()">
+      <option value="">همه سفارشات</option>
+      <option value="pending">در انتظار پرداخت</option>
+      <option value="paid">پرداخت شده</option>
+      <option value="processing">در حال پردازش</option>
+      <option value="shipped">ارسال شده</option>
+      <option value="delivered">تحویل داده شده</option>
+      <option value="cancelled">لغو شده</option>
+    </select>
+  </div>
+
+  <div class="loading-overlay" *ngIf="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- نسخه دسکتاپ -->
+  <div class="table-wrapper">
+    <table class="modern-table">
+      <thead>
+      <tr>
+        <th>شماره سفارش</th>
+        <th>تاریخ</th>
+        <th>تعداد اقلام</th>
+        <th>مبلغ (تومان)</th>
+        <th>وضعیت</th>
+        <th>عملیات</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let order of orders; trackBy: trackById">
+        <td class="order-number">{{ order.orderNumber }}</td>
+        <td>{{ order.createdAt | date:'yyyy/MM/dd HH:mm' }}</td>
+        <td>{{ order.items?.length || 0 }}</td>
+        <td class="order-amount">{{ order.total | number }}</td>
+        <td><span class="status-badge" [class]="'status-' + order.status">{{ getStatusLabel(order.status) }}</span></td>
+        <td>
+          <div class="action-buttons">
+            <button class="action-btn view" [routerLink]="['/dashboard/order-details', order._id]" title="مشاهده">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+            <button class="action-btn track" *ngIf="order.status === 'paid'" (click)="trackOrder(order)" title="پیگیری">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </button>
+          </div>
+        </td>
+      </tr>
+      <tr *ngIf="orders.length === 0 && !loading">
+        <td colspan="6" class="empty-row">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <p>هیچ سفارشی یافت نشد</p>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- نسخه موبایل -->
+  <div class="orders-list-mobile">
+    <div class="order-card" *ngFor="let order of orders; trackBy: trackById">
+      <div class="order-header">
+        <span class="order-number">{{ order.orderNumber }}</span>
+        <span class="status-badge" [class]="'status-' + order.status">{{ getStatusLabel(order.status) }}</span>
+      </div>
+      <div class="order-body">
+        <div><span class="label">تاریخ:</span><span class="value">{{ order.createdAt | date:'yyyy/MM/dd' }}</span></div>
+        <div><span class="label">تعداد اقلام:</span><span class="value">{{ order.items?.length || 0 }}</span></div>
+        <div><span class="label">مبلغ:</span><span class="value">{{ order.total | number }} تومان</span></div>
+      </div>
+      <div class="order-footer">
+        <button class="btn-view-order" [routerLink]="['/dashboard/order-details', order._id]">مشاهده جزئیات</button>
+        <button class="btn-track-order" *ngIf="order.status === 'paid'" (click)="trackOrder(order)">پیگیری سفارش</button>
+      </div>
+    </div>
+  </div>
+
+  <app-pagination
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    [totalItems]="totalOrders"
+    (pageChange)="changePage($event)">
+  </app-pagination></div>

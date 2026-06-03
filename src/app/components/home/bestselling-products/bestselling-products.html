@@ -1,0 +1,21 @@
+<div class="container mb-4">
+  <section class="flex flex-col justify-between">
+      <div class="top flex gap-4 ">
+        <div class="content flex  gap-4 flex-col">
+          <h2>پرفروش ترین ابزار های شکرت</h2>
+          <button class="btn btn-primary-lighter btn-lg text-primary-orange">مشاهد محصولات</button>
+        </div>
+        <img src="/pic-1.png" alt="image">
+
+      </div>
+    <div class="bottom flex justify-between items-center " *ngIf="!loading">
+        <app-product-card
+          *ngFor="let product of products"
+          [product]="product"
+          cardVariant="default"
+          (addToCart)="addToCart($event)">
+        </app-product-card>
+
+    </div>
+  </section>
+</div>

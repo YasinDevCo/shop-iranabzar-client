@@ -1,0 +1,128 @@
+.banner {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin-top: -60px;
+}
+
+.banner-content {
+  background: var(--primary-dark);
+  color: white;
+  border-radius: 35px 0 0 35px;
+  padding: 30px;
+  width: 48%;
+  height: calc(270px + 25px ) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 15px solid var(--gray-lighter);
+  border-right: 0;
+  box-sizing: border-box;
+
+}
+
+.banner-content h2 {
+  font-size: 2rem;
+  font-weight: 400;
+
+}
+
+.banner-content div {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.banner-content div div {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  margin-top: 10px;
+}
+
+.banner-content h2 span {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.banner-image {
+  background: var(--primary-orange);
+  border-radius: 30px;
+  width: 52%;
+  height: 340px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-image img {
+  width:95%;
+}
+
+
+.banner-show-where {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.banner-show-where div {
+  display: flex;
+  gap: 10px;
+}
+
+.banner-show-where div span   {
+  width: 14px;
+  height: 14px;
+  background: rgba(255, 80, 35, 0.27);
+  border-radius: 100%;
+}
+.banner-content button{
+  border: 3px solid rgba(43, 43, 43,.8);
+  border-radius: 10px !important;
+  width: 30px !important;
+height: 30px !important;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.banner-content button svg{
+  margin-right: 1px;
+  border-color: #2B2B2BCC;
+}
+.banner-show-where div span.active {
+  background: var(--primary-orange);
+}
+
+.banner-show-where div span {
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+
+
+.banner-content button:hover{
+  border: 3px solid rgba(43, 43, 43, 0.6);
+
+}.banner-content button:hover svg{
+   border-color: rgba(43, 43, 43, 0.6);
+ }
+@media (max-width: 768px) {
+  .banner {
+    flex-direction: column;
+  }
+
+  .banner-content {
+    border-radius: 35px;
+    padding: 50px 30px 30px;
+    width: 100%;
+  }
+  .banner-image {
+    width: 90%;
+    height: 240px !important;
+
+    margin-bottom: -40px;
+    z-index: 1000;
+    margin-left: 10px;
+  }
+}

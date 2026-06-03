@@ -1,0 +1,34 @@
+<div class="container container-top">
+  <section class="banner">
+    <div class="banner-image">
+      <img [src]="currentBanner.image" alt="banner pic">
+    </div>
+    <div class="banner-content">
+      <div>
+        <h2>
+          <span>
+            {{ currentBanner.title }}
+          </span>
+          <br>
+          {{ currentBanner.subtitle }}
+        </h2>
+        <div>
+          <button class="btn btn-icon-lighter btn-icon-sm-box" (click)="prevSlide()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2B2B2BCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m15 18-6-6 6-6"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="banner-show-where">
+    <div>
+      <span
+        *ngFor="let item of banners; let i = index"
+        [class.active]="i === currentIndex"
+        (click)="goToSlide(i)">
+      </span>
+    </div>
+  </div>
+</div>

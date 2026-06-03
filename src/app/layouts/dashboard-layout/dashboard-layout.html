@@ -1,0 +1,242 @@
+<div class="container-dashboard flex-col">
+  <section class="flex">
+    <!-- سایدبار -->
+    <aside class="sidebar-dashboard" [class.sidebar-closed]="!isSidebarOpen">
+      <div class="top">
+        <div class="flex justify-between">
+          <span class="text-primary-orange text-center text-xl" [class.logo-hidden]="!isSidebarOpen">
+            IRANABZAR
+          </span>
+          <img src="/hambermenue.svg" alt="menu" class="hambermenue" (click)="toggleSidebar()">
+        </div>
+
+        <!-- ناوبری ادمین -->
+        <nav class="menu" *ngIf="account.isAdmin(); else userNav">
+          <a class="menuItem" [class.active]="isActive('/dashboard/home')" (click)="setActiveLink('/dashboard/home')" routerLink="/dashboard/home">
+            <span class="menu-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </span>
+            <span class="menu-text" [class.text-hidden]="!isSidebarOpen">داشبورد</span>
+          </a>
+          <a class="menuItem" [class.active]="isActive('/dashboard/profile')" (click)="setActiveLink('/dashboard/profile')" routerLink="/dashboard/profile">
+            <span class="menu-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </span>
+            <span class="menu-text" [class.text-hidden]="!isSidebarOpen">پروفایل</span>
+          </a>
+          <a class="menuItem" [class.active]="isActive('/dashboard/my-orders')" (click)="setActiveLink('/dashboard/my-orders')" routerLink="/dashboard/my-orders">
+              <span class="menu-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                  <line x1="3" y1="6" x2="21" y2="6"/>
+                  <path d="M16 10a4 4 0 0 1-8 0"/>
+                </svg>
+              </span>
+            <span class="menu-text" [class.text-hidden]="!isSidebarOpen">سفارشات من</span>
+          </a>
+          <a class="menuItem" [class.active]="isActive('/dashboard/my-payments')" (click)="setActiveLink('/dashboard/my-payments')" routerLink="/dashboard/my-payments">
+              <span class="menu-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                  <line x1="1" y1="10" x2="23" y2="10"/>
+                </svg>
+              </span>
+            <span class="menu-text" [class.text-hidden]="!isSidebarOpen">پرداخت‌های من</span>
+          </a>
+          <a class="menuItem" [class.active]="isActive('/dashboard/wishlist')" (click)="setActiveLink('/dashboard/wishlist')" routerLink="/dashboard/wishlist">
+              <span class="menu-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+              </span>
+            <span class="menu-text" [class.text-hidden]="!isSidebarOpen">علاقه‌مندی‌ها</span>
+          </a>
+          <a class="menuItem" [class.active]="isActive('/dashboard/my-addresses')" (click)="setActiveLink('/dashboard/my-addresses')" routerLink="/dashboard/my-addresses">
+              <span class="menu-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </span>
+            <span class="menu-text" [class.text-hidden]="!isSidebarOpen">آدرس‌های من</span>
+          </a>
+          <a class="menuItem" [class.active]="isActive('/dashboard/my-reviews')" (click)="setActiveLink('/dashboard/my-reviews')" routerLink="/dashboard/my-reviews">
+              <span class="menu-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              </span>
+            <span class="menu-text" [class.text-hidden]="!isSidebarOpen">نظرات من</span>
+          </a>
+          <a class="menuItem" [class.active]="isActive('/dashboard/products')" (click)="setActiveLink('/dashboard/products')" routerLink="/dashboard/products">
+            <span class="menu-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+              </svg>
+            </span>
+            <span class="menu-text" [class.text-hidden]="!isSidebarOpen">محصول ها</span>
+          </a>
+          <a class="menuItem" [class.active]="isActive('/dashboard/users')" (click)="setActiveLink('/dashboard/users')" routerLink="/dashboard/users">
+            <span class="menu-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </span>
+            <span class="menu-text" [class.text-hidden]="!isSidebarOpen">کاربران</span>
+          </a>
+          <a class="menuItem" [class.active]="isActive('/dashboard/blogs')" (click)="setActiveLink('/dashboard/blogs')" routerLink="/dashboard/blogs">
+            <span class="menu-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16v16H4z"/>
+                <line x1="8" y1="8" x2="16" y2="8"/>
+                <line x1="8" y1="12" x2="16" y2="12"/>
+                <line x1="8" y1="16" x2="12" y2="16"/>
+              </svg>
+            </span>
+            <span class="menu-text" [class.text-hidden]="!isSidebarOpen">بلاگ ها</span>
+          </a>
+          <a class="menuItem" [class.active]="isActive('/dashboard/categories')" (click)="setActiveLink('/dashboard/categories')" routerLink="/dashboard/categories">
+            <span class="menu-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 7h-4.18A3 3 0 0 0 16 5.18V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v1.18A3 3 0 0 0 8.18 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                <line x1="12" y1="13" x2="12" y2="20"/>
+                <line x1="8" y1="17" x2="16" y2="17"/>
+              </svg>
+            </span>
+            <span class="menu-text" [class.text-hidden]="!isSidebarOpen">دسته‌بندی</span>
+          </a>
+          <a class="menuItem" [class.active]="isActive('/dashboard/payments')" (click)="setActiveLink('/dashboard/payments')" routerLink="/dashboard/payments">
+            <span class="menu-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                <line x1="1" y1="10" x2="23" y2="10"/>
+              </svg>
+            </span>
+            <span class="menu-text" [class.text-hidden]="!isSidebarOpen">پرداخت ها</span>
+          </a>
+          <a class="menuItem" [class.active]="isActive('/dashboard/messages')" (click)="setActiveLink('/dashboard/messages')" routerLink="/dashboard/messages">
+            <span class="menu-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </span>
+            <span class="menu-text" [class.text-hidden]="!isSidebarOpen">پیام ها</span>
+          </a>
+        </nav>
+
+        <!-- ناوبری کاربر عادی -->
+        <ng-template #userNav>
+          <nav class="menu">
+            <a class="menuItem" [class.active]="isActive('/dashboard/home')" (click)="setActiveLink('/dashboard/home')" routerLink="/dashboard/home">
+              <span class="menu-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                  <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+              </span>
+              <span class="menu-text" [class.text-hidden]="!isSidebarOpen">داشبورد</span>
+            </a>
+            <a class="menuItem" [class.active]="isActive('/dashboard/profile')" (click)="setActiveLink('/dashboard/profile')" routerLink="/dashboard/profile">
+              <span class="menu-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+              </span>
+              <span class="menu-text" [class.text-hidden]="!isSidebarOpen">پروفایل</span>
+            </a>
+            <a class="menuItem" [class.active]="isActive('/dashboard/my-orders')" (click)="setActiveLink('/dashboard/my-orders')" routerLink="/dashboard/my-orders">
+              <span class="menu-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                  <line x1="3" y1="6" x2="21" y2="6"/>
+                  <path d="M16 10a4 4 0 0 1-8 0"/>
+                </svg>
+              </span>
+              <span class="menu-text" [class.text-hidden]="!isSidebarOpen">سفارشات من</span>
+            </a>
+            <a class="menuItem" [class.active]="isActive('/dashboard/my-payments')" (click)="setActiveLink('/dashboard/my-payments')" routerLink="/dashboard/my-payments">
+              <span class="menu-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                  <line x1="1" y1="10" x2="23" y2="10"/>
+                </svg>
+              </span>
+              <span class="menu-text" [class.text-hidden]="!isSidebarOpen">پرداخت‌های من</span>
+            </a>
+            <a class="menuItem" [class.active]="isActive('/dashboard/wishlist')" (click)="setActiveLink('/dashboard/wishlist')" routerLink="/dashboard/wishlist">
+              <span class="menu-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+              </span>
+              <span class="menu-text" [class.text-hidden]="!isSidebarOpen">علاقه‌مندی‌ها</span>
+            </a>
+            <a class="menuItem" [class.active]="isActive('/dashboard/my-addresses')" (click)="setActiveLink('/dashboard/my-addresses')" routerLink="/dashboard/my-addresses">
+              <span class="menu-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </span>
+              <span class="menu-text" [class.text-hidden]="!isSidebarOpen">آدرس‌های من</span>
+            </a>
+            <a class="menuItem" [class.active]="isActive('/dashboard/my-reviews')" (click)="setActiveLink('/dashboard/my-reviews')" routerLink="/dashboard/my-reviews">
+              <span class="menu-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              </span>
+              <span class="menu-text" [class.text-hidden]="!isSidebarOpen">نظرات من</span>
+            </a>
+          </nav>
+        </ng-template>
+      </div>
+
+      <!-- فوتر سایدبار -->
+      <div class="footer">
+        <button class="btn btn-icon-outline-blue btn-icon-100" (click)="goToHome()">
+          <span class="menu-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </span>
+          <span class="menu-text" [class.text-hidden]="!isSidebarOpen">مشاهده سایت</span>
+        </button>
+        <button class="btn btn-icon-outline btn-icon-100" (click)="logout()">
+          <span class="menu-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+              <polyline points="16 17 21 12 16 7"/>
+              <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+          </span>
+          <span class="menu-text" [class.text-hidden]="!isSidebarOpen">خروج</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- بخش اصلی -->
+    <main [class.main-expanded]="!isSidebarOpen">
+      <header>
+        سلام محمد یاسین عزیز. به داشبورد
+        <samp class="text-primary-orange"> &nbsp;IRANABZAR&nbsp; </samp>
+        خوش آمدید!
+      </header>
+      <div class="main-dashboard">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  </section>
+</div>

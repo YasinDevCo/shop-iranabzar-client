@@ -1,0 +1,72 @@
+<div class="payments-container">
+  <div class="page-header">
+    <h3 class="panel-title">پرداخت‌های من</h3>
+  </div>
+
+  <div class="loading-overlay" *ngIf="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="table-wrapper">
+    <table class="modern-table">
+      <thead>
+      <tr>
+        <th>کد تراکنش</th>
+        <th>مبلغ (تومان)</th>
+        <th>تاریخ</th>
+        <th>وضعیت</th>
+        <th>عملیات</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let payment of payments; trackBy: trackById">
+        <td><span class="transaction-code">{{ payment.transactionCode }}</span></td>
+        <td class="payment-amount">{{ payment.amount | number }}</td>
+        <td>{{ payment.createdAt | date:'yyyy/MM/dd HH:mm' }}</td>
+        <td><span class="status-badge" [class]="'status-' + payment.status">{{ getStatusLabel(payment.status) }}</span></td>
+        <td>
+          <button class="action-btn invoice" (click)="downloadInvoice(payment)" *ngIf="payment.status === 'paid'" title="دانلود فاکتور">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+          </button>
+        </td>
+      </tr>
+      <tr *ngIf="payments.length === 0 && !loading">
+        <td colspan="5" class="empty-row">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+            <line x1="1" y1="10" x2="23" y2="10"/>
+          </svg>
+          <p>هیچ پرداختی یافت نشد</p>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="payments-list-mobile">
+    <div class="payment-card" *ngFor="let payment of payments; trackBy: trackById">
+      <div class="payment-header">
+        <span class="payment-code">{{ payment.transactionCode }}</span>
+        <span class="status-badge" [class]="'status-' + payment.status">{{ getStatusLabel(payment.status) }}</span>
+      </div>
+      <div class="payment-body">
+        <div><span class="label">مبلغ:</span><span class="value">{{ payment.amount | number }} تومان</span></div>
+        <div><span class="label">تاریخ:</span><span class="value">{{ payment.createdAt | date:'yyyy/MM/dd HH:mm' }}</span></div>
+      </div>
+      <div class="payment-footer">
+        <button (click)="downloadInvoice(payment)" *ngIf="payment.status === 'paid'" title="دانلود فاکتور">📄 دانلود فاکتور</button>
+      </div>
+    </div>
+  </div>
+
+  <app-pagination
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    [totalItems]="totalPayments"
+    (pageChange)="changePage($event)">
+  </app-pagination></div>

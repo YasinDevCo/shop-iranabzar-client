@@ -1,0 +1,180 @@
+
+/* Main Container */
+.category-container {
+  margin-top: 50px;
+}
+
+/* Wrapper for scroll handling */
+.category-wrapper {
+  width: 100%;
+  overflow: visible;
+}
+
+/* Category List - Desktop (flex wrap) */
+.category-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Individual Category Item */
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Category Icon Box */
+.category-icon {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.07);
+  transition: all 0.2s ease;
+}
+
+.category-icon:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Active Category */
+.category-icon.active {
+  background: linear-gradient(135deg, #ff5722, #ff8a50);
+  box-shadow: 0 8px 20px rgba(255, 87, 34, 0.3);
+}
+
+.category-icon.active img {
+  filter: brightness(0) invert(1);
+}
+
+/* Category Name */
+.category-name {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #495057;
+  text-align: center;
+  transition: color 0.2s;
+}
+
+.category-item:hover .category-name {
+  color: #ff5722;
+}
+
+/* ========== MOBILE VIEW (Horizontal Scroll - Hidden Scrollbar) ========== */
+.mobile-scroll .category-list {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: 12px;
+  justify-content: flex-start;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
+  /* Hide scrollbar for all browsers */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Hide scrollbar for Webkit browsers (Chrome, Safari, Edge) */
+.mobile-scroll .category-list::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Mobile Category Icon */
+.mobile-scroll .category-item {
+  flex-shrink: 0;
+}
+
+.mobile-scroll .category-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 18px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.07);
+}
+
+.mobile-scroll .category-icon.active {
+  transform: scale(1.05);
+}
+
+.mobile-scroll .category-icon img {
+  width: 32px;
+  height: 32px;
+}
+
+.mobile-scroll .category-name {
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+/* ========== EXTRA SMALL MOBILE (max-width: 480px) ========== */
+@media (max-width: 480px) {
+  .category-container {
+    padding: 0 12px;
+  }
+
+  .mobile-scroll .category-list {
+    gap: 10px;
+  }
+
+  .mobile-scroll .category-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+  }
+
+  .mobile-scroll .category-icon img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .mobile-scroll .category-name {
+    font-size: 0.65rem;
+  }
+}
+
+/* ========== TABLET (max-width: 768px) ========== */
+@media (max-width: 768px) and (min-width: 481px) {
+  .category-container {
+    padding: 0 16px;
+  }
+
+  .mobile-scroll .category-icon {
+    width: 75px;
+    height: 75px;
+  }
+
+  .mobile-scroll .category-icon img {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+/* ========== DESKTOP HOVER EFFECTS ========== */
+@media (min-width: 769px) {
+  .category-icon {
+    width: 110px;
+    height: 110px;
+  }
+
+  .category-icon.active {
+    transform: scale(1.02);
+  }
+
+  .category-name {
+    font-size: 0.9rem;
+  }
+}

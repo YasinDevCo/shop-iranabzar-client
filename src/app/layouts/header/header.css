@@ -1,0 +1,170 @@
+header{
+  margin: 30px 0;
+}
+
+
+header h1{
+  font-family: "SN Pro";
+  color: var(--primary-orange);
+}
+.search-wrapper {
+  position: relative;
+  width: fit-content;
+  direction: rtl;
+}
+
+.search-field {
+  width: 320px;
+  padding: 10px 16px;
+  padding-left: 42px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.search-field:focus {
+  border-color: #FF5023;
+}
+
+.search-button {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 43.11px;
+  height: 43.11px;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  background: var(--primary-orange);
+  cursor: pointer;
+  color: white;
+  padding: 0;
+}
+
+.search-button:hover {
+  transition:  ease-in-out .2s .2s;
+  background: var(--primary-dark);
+}
+.header2 header{
+  padding: 10px 0;
+}
+
+.header2 ul li a{
+  font-size: .9rem;
+  font-weight: 500;
+  color: var(--primary-dark);
+}
+.header2 ul li a {
+  font-size: .9rem;
+  font-weight: 500;
+  color: var(--primary-dark);
+  transition: all 0.2s ease-in-out;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+/* استایل پایه برای ul */
+.header2 ul {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* استایل پایه برای لینک‌ها */
+.header2 ul li a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--primary-dark);
+  transition: all 0.2s ease-in-out;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* transition برای همه المان‌ها */
+.header2 ul li a,
+.header2 ul li a p,
+.header2 ul li a svg path,
+.header2 ul li a svg circle {
+  transition: all 0.2s ease-in-out;
+}
+
+/* حالت hover برای متن */
+.header2 ul li a:hover {
+  color: #FF5023;
+}
+
+.header2 ul li a:hover p {
+  color: #FF5023;
+}
+
+/* حالت hover برای آیکون‌ها - مخصوص آیکون خانه که fill دارد */
+.header2 ul li a:hover svg path[fill="#212121FF"] {
+  fill: #FF5023 !important;
+}
+
+/* حالت hover برای آیکون‌های دارای stroke */
+.header2 ul li a:hover svg path[stroke="#212121FF"],
+.header2 ul li a:hover svg path[stroke="#212135"],
+.header2 ul li a:hover svg circle[stroke="#212121FF"],
+.header2 ul li a:hover svg circle[stroke="#212135"] {
+  stroke: #FF5023 !important;
+}
+
+/* حالت hover برای دایره‌های آیکون سوالات متداول */
+.header2 ul li a:hover svg circle[fill="#212135"] {
+  fill: #FF5023 !important;
+}
+
+/* حالت active */
+.header2 ul li a.active {
+  color: #FF5023;
+  font-weight: 600;
+  font-size: 1rem;
+
+}
+
+.header2 ul li a.active p {
+  color: #FF5023;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* حالت active برای آیکون خانه که fill دارد */
+.header2 ul li a.active svg path[fill="#212121FF"] {
+  fill: #FF5023 !important;
+}
+
+/* حالت active برای آیکون‌های دارای stroke */
+.header2 ul li a.active svg path[stroke="#212121FF"],
+.header2 ul li a.active svg path[stroke="#212135"],
+.header2 ul li a.active svg circle[stroke="#212121FF"],
+.header2 ul li a.active svg circle[stroke="#212135"] {
+  stroke: #FF5023 !important;
+}
+
+/* حالت active برای دایره‌های آیکون سوالات متداول */
+.header2 ul li a.active svg circle[fill="#212135"] {
+  fill: #FF5023 !important;
+}
+
+
+@media (max-width: 768px) {
+
+}
+@media (max-width: 420px) {
+
+}

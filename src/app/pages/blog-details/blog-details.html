@@ -1,0 +1,47 @@
+<div class="blog-details-container" *ngIf="!loading">
+  <div class="blog-header" *ngIf="blog">
+    <div class="blog-header-content">
+      <div class="blog-meta">
+        <span class="blog-date">{{ blog.createdAt | date:'yyyy/MM/dd' }}</span>
+        <span class="blog-author">✍️ {{ blog.author }}</span>
+        <span class="blog-views">👁️ {{ blog.views }} بازدید</span>
+      </div>
+      <h1 class="blog-title">{{ blog.title }}</h1>
+    </div>
+    <img [src]="blog.image || 'assets/images/default-blog.jpg'" [alt]="blog.title" class="blog-cover">
+  </div>
+
+  <div class="blog-content" *ngIf="blog">
+    <div class="blog-tags" *ngIf="blog.tags?.length">
+      <span class="tag-label">برچسب‌ها:</span>
+      <span class="tag" *ngFor="let tag of blog.tags">{{ tag }}</span>
+    </div>
+    <div class="blog-body" [innerHTML]="blog.content"></div>
+    <div class="blog-footer">
+      <div class="blog-share">
+        <span>اشتراک گذاری:</span>
+        <button class="share-btn">📘</button>
+        <button class="share-btn">🐦</button>
+        <button class="share-btn">📱</button>
+      </div>
+      <a routerLink="/blogs" class="btn-back flex items-center gap-1">
+        <svg _ngcontent-ng-c2737490226="" width="21" height="21" viewBox="0 0 21 21" fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+          <path _ngcontent-ng-c2737490226=""
+                d="M10.2227 19.5929C12.3074 19.5929 13.9244 19.4796 15.1856 19.1993C16.4372 18.9212 17.2859 18.4897 17.8878 17.8878C18.4897 17.2859 18.9211 16.4373 19.1993 15.1857C19.4796 13.9244 19.5928 12.3067 19.5928 10.2218C19.5928 8.13716 19.4795 6.52009 19.1993 5.25891C18.9211 4.00726 18.4897 3.15866 17.8878 2.55676C17.2859 1.95486 16.4373 1.52341 15.1856 1.24524C13.9244 0.965 12.3074 0.8517 10.2227 0.851685C8.1378 0.851685 6.52013 0.964963 5.25885 1.24524C4.0072 1.52341 3.1586 1.95486 2.5567 2.55676C1.95483 3.15866 1.52334 4.0073 1.24518 5.25891C0.964942 6.52009 0.851639 8.13717 0.851624 10.2218C0.851624 12.3067 0.964906 13.9244 1.24518 15.1857C1.52335 16.4373 1.9548 17.2859 2.5567 17.8878C3.1586 18.4897 4.0072 18.9212 5.25885 19.1993C6.52013 19.4796 8.13782 19.5929 10.2227 19.5929Z"
+                stroke-width="1.7037" stroke-linecap="round" stroke-linejoin="round" stroke="#ff5722"></path>
+          <path _ngcontent-ng-c2737490226="" d="M8.51855 5.96297H11.926" stroke-width="1.7037" stroke-linecap="round"
+                stroke-linejoin="round" stroke="#ff5722"></path>
+          <path _ngcontent-ng-c2737490226="" d="M5.96301 10.2222H14.4815" stroke-width="1.7037" stroke-linecap="round"
+                stroke-linejoin="round" stroke="#ff5722"></path>
+          <path _ngcontent-ng-c2737490226="" d="M8.51855 14.4815L11.926 14.4815" stroke-width="1.7037"
+                stroke-linecap="round" stroke-linejoin="round" stroke="#ff5722"></path>
+        </svg>
+        بازگشت به لیست مقالات</a>
+    </div>
+  </div>
+
+  <div class="loading-overlay" *ngIf="loading">
+    <div class="spinner"></div>
+  </div>
+</div>

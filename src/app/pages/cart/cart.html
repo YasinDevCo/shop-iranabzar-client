@@ -1,0 +1,61 @@
+<div class="cart-container">
+  <h1 class="cart-title">سبد خرید</h1>
+
+  <div class="cart-content" *ngIf="cartItems.length > 0; else emptyCart">
+    <div class="cart-items">
+      <div class="cart-item" *ngFor="let item of cartItems">
+        <div class="item-image">
+          <img [src]="item.image || '/assets/images/default-product.png'" [alt]="item.title">
+        </div>
+        <div class="item-details">
+          <h3 class="item-title">{{ item.title }}</h3>
+          <div class="item-price">{{ item.price | number }} تومان</div>
+        </div>
+        <div class="item-quantity">
+          <button class="qty-btn" (click)="updateQuantity(item, item.quantity - 1)">-</button>
+          <span class="qty-value">{{ item.quantity }}</span>
+          <button class="qty-btn" (click)="updateQuantity(item, item.quantity + 1)">+</button>
+        </div>
+        <div class="item-total">
+          {{ (item.price * item.quantity) | number }} تومان
+        </div>
+        <button class="item-remove" (click)="removeItem(item)">🗑️</button>
+      </div>
+
+      <div class="cart-actions">
+        <button class="btn-clear" (click)="clearCart()">پاک کردن سبد خرید</button>
+        <a  routerLink="/checkout" class="btn-continue">ادامه خرید</a>
+      </div>
+    </div>
+
+    <div class="cart-summary">
+      <h3>خلاصه سبد خرید</h3>
+      <div class="summary-row">
+        <span>جمع جزء:</span>
+        <span>{{ getSubtotal() | number }} تومان</span>
+      </div>
+      <div class="summary-row">
+        <span>هزینه ارسال:</span>
+        <span>{{ shippingCost | number }} تومان</span>
+      </div>
+      <div class="summary-row">
+        <span>مالیات (۹٪):</span>
+        <span>{{ getTaxAmount() | number }} تومان</span>
+      </div>
+      <div class="summary-row total">
+        <span>مجموع:</span>
+        <span>{{ getTotal() | number }} تومان</span>
+      </div>
+      <button class="btn-checkout" routerLink="/checkout">پرداخت</button>
+    </div>
+  </div>
+
+  <ng-template #emptyCart>
+    <div class="empty-cart">
+      <div class="empty-icon">🛒</div>
+      <h2>سبد خرید شما خالی است</h2>
+      <p>محصولات مورد نظر خود را به سبد خرید اضافه کنید</p>
+      <a routerLink="/products" class="btn-shop">مشاهده محصولات</a>
+    </div>
+  </ng-template>
+</div>

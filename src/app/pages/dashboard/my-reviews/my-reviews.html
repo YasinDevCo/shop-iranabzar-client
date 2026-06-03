@@ -1,0 +1,119 @@
+<div class="reviews-container">
+  <div class="page-header">
+    <h3 class="panel-title">نظرات من</h3>
+  </div>
+
+  <div class="stats-card" *ngIf="stats.total > 0">
+    <div class="stats-content">
+      <div class="stats-item">
+        <span class="stats-number">{{ stats.total }}</span>
+        <span class="stats-label">تعداد نظرات</span>
+      </div>
+      <div class="stats-divider"></div>
+      <div class="stats-item">
+        <span class="stats-number">{{ stats.average | number:'1.1-1' }}</span>
+        <span class="stats-label">میانگین امتیاز</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="loading-overlay" *ngIf="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="reviews-list" *ngIf="!loading">
+    <div class="review-card" *ngFor="let review of reviews; trackBy: trackById">
+      <div class="review-header">
+        <div class="product-info">
+          <h4 class="product-title">{{ review.productId?.title }}</h4>
+          <div class="product-rating">
+            <span class="stars">{{ getRatingStars(review.rating) }}</span>
+            <span class="rating-number">({{ review.rating }}/5)</span>
+          </div>
+        </div>
+        <div class="review-date">{{ review.createdAt | date:'yyyy/MM/dd' }}</div>
+      </div>
+      <div class="review-body">
+        <h5 class="review-title">{{ review.title }}</h5>
+        <p class="review-comment">{{ review.comment }}</p>
+      </div>
+      <div class="review-footer">
+        <button class="btn-edit-review" (click)="openEditModal(review)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <path d="M17 3l4 4-7 7H10v-4l7-7z"/>
+            <path d="M4 20h16"/>
+          </svg>
+          ویرایش
+        </button>
+        <button class="btn-delete-review" (click)="deleteReview(review._id, review.productId?.title)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <polyline points="3 6 5 6 21 6"/>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+          </svg>
+          حذف
+        </button>
+      </div>
+    </div>
+
+    <div class="empty-reviews" *ngIf="reviews.length === 0">
+      <div class="empty-icon">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+      </div>
+      <h3>شما هنوز نظری ثبت نکرده‌اید</h3>
+      <p>با ثبت نظر به سایر کاربران کمک کنید</p>
+      <button class="btn-shop" routerLink="/products">مشاهده محصولات</button>
+    </div>
+  </div>
+
+  <app-pagination
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    [totalItems]="totalReviews"
+    (pageChange)="changePage($event)">
+  </app-pagination>
+</div>
+
+<div class="modal-overlay" *ngIf="showEditModal" (click)="closeEditModal()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>ویرایش نظر</h3>
+      <button class="modal-close" (click)="closeEditModal()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>امتیاز شما</label>
+        <div class="rating-input">
+          <select class="form-control" [(ngModel)]="editModel.rating">
+            <option value="5">⭐⭐⭐⭐⭐ (عالی)</option>
+            <option value="4">⭐⭐⭐⭐ (خوب)</option>
+            <option value="3">⭐⭐⭐ (متوسط)</option>
+            <option value="2">⭐⭐ (ضعیف)</option>
+            <option value="1">⭐ (خیلی ضعیف)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>عنوان نظر</label>
+        <input type="text" class="form-control" [(ngModel)]="editModel.title" placeholder="خلاصه نظر شما">
+      </div>
+      <div class="form-group">
+        <label>متن نظر</label>
+        <textarea class="form-control" rows="5" [(ngModel)]="editModel.comment"
+                  placeholder="توضیحات کامل نظر شما"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" (click)="closeEditModal()">انصراف</button>
+      <button class="btn-primary" (click)="updateReview()" [disabled]="submitted">
+        {{ submitted ? 'در حال ویرایش...' : 'ویرایش نظر' }}
+      </button>
+    </div>
+  </div>
+</div>

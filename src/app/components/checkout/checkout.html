@@ -1,0 +1,175 @@
+<div class="checkout-page">
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">تسویه حساب</h1>
+      <p class="page-description">اطلاعات خود را تکمیل کنید تا سفارش شما ثبت شود</p>
+    </div>
+
+    <div class="checkout-content">
+      <!-- بخش اطلاعات -->
+      <div class="checkout-info">
+        <!-- آدرس ارسال -->
+        <div class="info-card">
+          <div class="card-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <h3>آدرس ارسال</h3>
+          </div>
+
+          <div class="card-body">
+            <!-- لیست آدرس‌ها -->
+            <div class="address-list" *ngIf="addresses.length > 0 && !showAddressForm">
+              <div class="address-item" *ngFor="let addr of addresses" (click)="selectedAddressId = addr.id">
+                <div class="address-radio">
+                  <div class="radio" [class.selected]="selectedAddressId === addr.id"></div>
+                </div>
+                <div class="address-details">
+                  <div class="address-name">{{ addr.fullName }} <span *ngIf="addr.isDefault" class="default-badge">پیش‌فرض</span></div>
+                  <div class="address-text">{{ addr.address }}</div>
+                  <div class="address-text">{{ addr.city }}، {{ addr.province }}</div>
+                  <div class="address-contact">تلفن: {{ addr.phone }} | کد پستی: {{ addr.postalCode }}</div>
+                </div>
+              </div>
+
+              <div class="add-new-address" (click)="showAddressForm = true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="5" x2="12" y2="19"/>
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                <span>افزودن آدرس جدید</span>
+              </div>
+            </div>
+
+            <!-- فرم آدرس جدید -->
+            <div class="address-form" *ngIf="showAddressForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <label>نام و نام خانوادگی</label>
+                  <input type="text" class="form-control" [(ngModel)]="newAddress.fullName" placeholder="نام کامل گیرنده">
+                </div>
+                <div class="form-group">
+                  <label>شماره موبایل</label>
+                  <input type="tel" class="form-control" [(ngModel)]="newAddress.phone" placeholder="09123456789">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>استان</label>
+                  <input type="text" class="form-control" [(ngModel)]="newAddress.province" placeholder="استان">
+                </div>
+                <div class="form-group">
+                  <label>شهر</label>
+                  <input type="text" class="form-control" [(ngModel)]="newAddress.city" placeholder="شهر">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>آدرس کامل</label>
+                <textarea class="form-control" rows="2" [(ngModel)]="newAddress.address" placeholder="خیابان، کوچه، پلاک..."></textarea>
+              </div>
+              <div class="form-group">
+                <label>کد پستی</label>
+                <input type="text" class="form-control" [(ngModel)]="newAddress.postalCode" placeholder="کد پستی 10 رقمی">
+              </div>
+              <div class="form-group checkbox">
+                <label>
+                  <input type="checkbox" [(ngModel)]="newAddress.isDefault">
+                  <span>تنظیم به عنوان آدرس پیش‌فرض</span>
+                </label>
+              </div>
+              <div class="form-actions">
+                <button class="btn-cancel" (click)="showAddressForm = false">انصراف</button>
+                <button class="btn-save" (click)="createNewAddress()" [disabled]="loading">ذخیره آدرس</button>
+              </div>
+            </div>
+
+            <div class="no-address" *ngIf="addresses.length === 0 && !showAddressForm">
+              <p>هیچ آدرسی ثبت نشده است</p>
+              <button class="btn-add-address" (click)="showAddressForm = true">افزودن آدرس جدید</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- روش ارسال -->
+        <div class="info-card">
+          <div class="card-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="1" y="3" width="15" height="13"/>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+              <circle cx="5.5" cy="18.5" r="2.5"/>
+              <circle cx="18.5" cy="18.5" r="2.5"/>
+            </svg>
+            <h3>روش ارسال</h3>
+          </div>
+          <div class="card-body">
+            <div class="shipping-methods">
+              <div class="shipping-item" *ngFor="let method of shippingMethods" (click)="selectedShippingMethod = method">
+                <div class="shipping-radio">
+                  <div class="radio" [class.selected]="selectedShippingMethod.id === method.id"></div>
+                </div>
+                <div class="shipping-details">
+                  <div class="shipping-name">{{ method.name }}</div>
+                  <div class="shipping-time">{{ method.time }}</div>
+                </div>
+                <div class="shipping-cost">{{ method.cost | number }} تومان</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- خلاصه سبد خرید -->
+      <div class="checkout-summary">
+        <div class="summary-card">
+          <div class="card-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="9" cy="21" r="1"/>
+              <circle cx="20" cy="21" r="1"/>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+            </svg>
+            <h3>سبد خرید</h3>
+            <span class="item-count">{{ getTotalItems() }} محصول</span>
+          </div>
+
+          <div class="cart-items">
+            <div class="cart-item" *ngFor="let item of cartItems">
+              <img [src]="item.image || '/assets/images/default-product.png'" [alt]="item.title" class="item-image">
+              <div class="item-details">
+                <div class="item-title">{{ item.title }}</div>
+                <div class="item-price">{{ item.price | number }} تومان</div>
+                <div class="item-quantity">تعداد: {{ item.quantity }}</div>
+              </div>
+              <div class="item-total">{{ (item.price * item.quantity) | number }} تومان</div>
+            </div>
+          </div>
+
+          <div class="price-details">
+            <div class="price-row">
+              <span>جمع جزء</span>
+              <span>{{ subtotal | number }} تومان</span>
+            </div>
+            <div class="price-row">
+              <span>هزینه ارسال</span>
+              <span>{{ shippingCost | number }} تومان</span>
+            </div>
+            <div class="price-row">
+              <span>مالیات (۹٪)</span>
+              <span>{{ tax | number }} تومان</span>
+            </div>
+            <div class="price-row total">
+              <span>مبلغ قابل پرداخت</span>
+              <span>{{ total | number }} تومان</span>
+            </div>
+          </div>
+
+          <button class="btn-submit" (click)="submitOrder()" [disabled]="submitting">
+            <span *ngIf="!submitting">پرداخت و ثبت سفارش</span>
+            <span *ngIf="submitting" class="spinner"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

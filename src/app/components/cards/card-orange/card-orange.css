@@ -1,0 +1,205 @@
+/* کارت با سایز ثابت و عکس در بالا */
+.card-image-top {
+  width: 271px;
+  height: 400px;
+  background-color: var(--primary-orange);
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px -5px rgba(255, 80, 35, 0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.card-image-top:hover {
+  box-shadow: 0 10px 30px -5px rgba(255, 80, 35, 0.34);
+  transform: translateY(-4px);
+}
+
+.card-image-top .card-image {
+  width: 100%;
+  height: 180px;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--gray-lightest);
+  background-size: cover;
+  background-position: center;
+  padding: 20px;
+}
+
+.card-image-top .card-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.card-image-top .card-content {
+  padding-top: 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* ========== اصلاح فونت‌ها ========== */
+
+/* عنوان محصول */
+.card-content h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  color: white;
+}
+
+/* توضیحات محصول */
+.card-content p {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.5rem;
+}
+
+/* بخش قیمت */
+.card-content .flex.items-center.justify-between {
+  margin: 8px 0;
+}
+
+/* لیبل قیمت */
+.card-content .flex.items-center.justify-between span:first-child {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* مبلغ قیمت */
+.card-content .flex.items-center.justify-between span:last-child {
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+}
+
+/* خط جداکننده */
+.card-content hr {
+  border-color: rgba(255, 255, 255, 0.3);
+  margin: 8px 0;
+}
+
+
+
+/* ========== ریسپانسیو ========== */
+
+@media (max-width: 1024px) {
+  .card-image-top {
+    width: 261px;
+    height: 390px;
+  }
+
+  .card-image-top .card-image {
+    height: 170px;
+  }
+
+  .card-content h3 {
+    font-size: 0.95rem;
+  }
+
+  .card-content p {
+    font-size: 0.7rem;
+  }
+
+  .card-content .btn {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-image-top {
+    width: 251px;
+    height: 380px;
+  }
+
+  .card-image-top .card-image {
+    height: 160px;
+  }
+
+  .card-content h3 {
+    font-size: 0.9rem;
+  }
+
+  .card-content p {
+    font-size: 0.68rem;
+  }
+
+  .card-content .flex.items-center.justify-between span:first-child {
+    font-size: 0.8rem;
+  }
+
+  .card-content .flex.items-center.justify-between span:last-child {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .card-image-top {
+    width: 241px;
+    height: 370px;
+  }
+
+  .card-image-top .card-image {
+    height: 150px;
+  }
+
+  .card-content h3 {
+    font-size: 0.85rem;
+  }
+
+  .card-content p {
+    font-size: 0.65rem;
+  }
+
+  .card-content .btn {
+    font-size: 0.65rem;
+    padding: 6px 8px;
+  }
+
+  .card-content .btn svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-image-top {
+    width: 200px;
+    height: 310px;
+  }
+
+  .card-image-top .card-image {
+    height: 120px;
+  }
+
+  .card-content h3 {
+    font-size: 0.8rem;
+  }
+
+  .card-content p {
+    font-size: 0.6rem;
+  }
+
+  .card-content .flex.items-center.justify-between span:first-child {
+    font-size: 0.7rem;
+  }
+
+  .card-content .flex.items-center.justify-between span:last-child {
+    font-size: 0.8rem;
+  }
+
+  .card-content .btn {
+    font-size: 0.6rem;
+    padding: 5px 6px;
+  }
+}

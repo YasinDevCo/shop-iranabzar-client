@@ -1,0 +1,142 @@
+section {
+height: 800px
+}
+.right {
+  width: 20%;
+  height: 100%;
+  background: var(--secondary-orange);
+  border-radius: 20px;
+  position: relative;
+  /*overflow: hidden;*/
+}
+
+.right img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-60%, -50%);
+  height: auto;
+  z-index: 1000;
+}
+
+.left {
+  width: 80%;
+  height: 100%;
+  background: var(--secondary-orange);
+  border-radius: 20px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.content {
+  align-items: flex-start;
+  color: white;
+}
+
+.content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.content p {
+  line-height: 2rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.cards {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.cards app-product-card {
+  flex: 1;
+  min-width: 0;
+}
+
+
+
+@media (max-width: 1080px) {
+  .content{
+    display: none;
+  }
+
+  section {
+    flex-direction: column;
+    height: fit-content;
+    gap: 0;
+  }
+
+  .right {
+    display: none;
+  }
+
+  .cards {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 16px;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 10px;
+    flex-wrap: nowrap;
+  }
+  .left {
+    width: 100%;
+    padding: 30px;
+    padding-bottom:0px ;
+    /*padding: 30px;*/
+  }
+
+  .cards app-product-card {
+    flex: 0 0 280px;
+    scroll-snap-align: start;
+  }
+
+  /* اسکرول بار سفارشی */
+  .cards::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .cards::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+  }
+
+  .cards::-webkit-scrollbar-thumb {
+    background: #ff5722;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .left {
+    /*padding: 40px;*/
+  }
+  .cards app-card {
+    flex: 0 0 240px;
+  }
+  .cards {
+    gap: 30px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .cards {
+    gap: 50px;
+  }
+  .left {
+    /*padding: 40px;*/
+  }
+  .cards app-card {
+    flex: 0 0 220px;
+  }
+  .btn-primary-lighter {
+    width: 100%;
+    text-align: center;
+  }
+}

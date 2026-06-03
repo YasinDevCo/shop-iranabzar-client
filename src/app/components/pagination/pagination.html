@@ -1,0 +1,45 @@
+<div class="pagination" *ngIf="totalPages > 1">
+  <!-- Previous button -->
+  <button
+    class="page-btn"
+    (click)="changePage(currentPage - 1)"
+    [disabled]="currentPage === 1">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="9 18 15 12 9 6"/>
+    </svg>
+    قبلی
+  </button>
+
+  <!-- Page numbers (desktop) -->
+  <div class="page-numbers" *ngIf="!isMobileView">
+    <button
+      *ngFor="let page of pageNumbers"
+      class="page-num"
+      [class.active]="page === currentPage"
+      (click)="changePage(page)">
+      {{ page }}
+    </button>
+  </div>
+
+  <!-- Info (mobile) -->
+  <span class="page-info" *ngIf="isMobileView">
+    صفحه {{ currentPage }} از {{ totalPages }}
+  </span>
+
+  <!-- Info (desktop) -->
+  <span class="page-info" *ngIf="!isMobileView">
+    صفحه {{ currentPage }} از {{ totalPages }} ({{ totalItems }} {{ itemLabel }})
+  </span>
+
+  <!-- Next button -->
+  <button
+    class="page-btn"
+    (click)="changePage(currentPage + 1)"
+    [disabled]="currentPage === totalPages">
+    بعدی
+
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+  </button>
+</div>

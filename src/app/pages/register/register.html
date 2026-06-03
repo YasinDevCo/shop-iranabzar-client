@@ -1,0 +1,88 @@
+<section class="auth-container">
+  <div class="logo">
+    <h1>IRANABZAR</h1>
+  </div>
+
+  <div class="form-title">
+    ایجاد حساب کاربری
+  </div>
+
+  <form (ngSubmit)="handleRegister()">
+    <app-input-field
+      type="text"
+      name="lastName"
+      placeholder="نام خانوادگی"
+      [(ngModel)]="model.lastName"
+      [required]="true"
+      [submitted]="submitted"
+    ></app-input-field>
+
+    <app-input-field
+      type="text"
+      name="name"
+      placeholder="نام"
+      [(ngModel)]="model.name"
+      [required]="true"
+      [submitted]="submitted"
+    ></app-input-field>
+
+    <app-input-field
+      type="tel"
+      name="mobile"
+      placeholder="شماره موبایل"
+      [(ngModel)]="model.mobile"
+      [required]="true"
+      pattern="09[0-9]{9}"
+      [submitted]="submitted"
+    ></app-input-field>
+
+    <app-input-field
+      type="email"
+      name="email"
+      placeholder="ایمیل"
+      [(ngModel)]="model.email"
+      [required]="true"
+      [email]="true"
+      [submitted]="submitted"
+    ></app-input-field>
+
+    <app-input-field
+      type="password"
+      name="password"
+      placeholder="رمز عبور"
+      [(ngModel)]="model.password"
+      [required]="true"
+      [minlength]="6"
+      [submitted]="submitted"
+    ></app-input-field>
+
+    <div class="input-group">
+      <input
+        type="password"
+        name="confirmPassword"
+        [(ngModel)]="model.confirmPassword"
+        placeholder="تکرار رمز عبور"
+      >
+      <div class="error-message" *ngIf="submitted && model.password !== model.confirmPassword">
+        رمز عبور و تکرار آن مطابقت ندارند
+      </div>
+    </div>
+
+    <div class="terms-text">
+      با کلیک روی "ایجاد حساب کاربری"،
+      <a href="#">شرایط و قوانین</a> و
+      <a href="#">حریم خصوصی</a> ما را می‌پذیرید.
+    </div>
+
+    <button type="submit" class="btn-submit" [disabled]="loading">
+      <span *ngIf="!loading">ایجاد حساب کاربری</span>
+      <span *ngIf="loading" class="spinner"></span>
+    </button>
+
+    <div class="toggle-mode">
+      <button type="button" class="toggle-btn" (click)="goToLogin()">
+        حساب کاربری دارید؟ وارد شوید
+      </button>
+    </div>
+  </form>
+</section>

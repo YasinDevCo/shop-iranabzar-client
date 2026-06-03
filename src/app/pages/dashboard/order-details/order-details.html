@@ -1,0 +1,107 @@
+<div class="order-details-container">
+  <div class="page-header">
+    <div class="header-left">
+      <button class="btn-back" routerLink="/dashboard/my-orders">← بازگشت</button>
+      <h3 class="panel-title">جزئیات سفارش</h3>
+    </div>
+    <div class="order-status" *ngIf="order">
+      <span class="status-badge" [class]="getStatusClass(order.status)">
+        {{ getStatusLabel(order.status) }}
+      </span>
+    </div>
+  </div>
+
+  <div class="loading-overlay" *ngIf="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="order-content" *ngIf="order && !loading">
+    <!-- Order info card -->
+    <div class="info-card">
+      <h4>اطلاعات سفارش</h4>
+      <div class="info-grid">
+        <div class="info-item">
+          <label>شماره سفارش:</label>
+          <span>{{ order.orderNumber }}</span>
+        </div>
+        <div class="info-item">
+          <label>تاریخ ثبت:</label>
+          <span>{{ order.createdAt | date:'yyyy/MM/dd HH:mm' }}</span>
+        </div>
+        <div class="info-item">
+          <label>روش ارسال:</label>
+          <span>پست پیشتاز</span>
+        </div>
+        <div class="info-item">
+          <label>روش پرداخت:</label>
+          <span>زرین‌پال</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shipping address card -->
+    <div class="info-card">
+      <h4>آدرس ارسال</h4>
+      <div class="address-info" *ngIf="order.shippingAddress">
+        <p><strong>{{ order.shippingAddress.fullName }}</strong></p>
+        <p>{{ order.shippingAddress.province }} - {{ order.shippingAddress.city }}</p>
+        <p>{{ order.shippingAddress.address }}</p>
+        <p>کد پستی: {{ order.shippingAddress.postalCode }}</p>
+        <p>تلفن: {{ order.shippingAddress.phone }}</p>
+      </div>
+    </div>
+
+    <!-- Products card -->
+    <div class="info-card">
+      <h4>محصولات سفارش</h4>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>محصول</th>
+            <th>قیمت واحد</th>
+            <th>تعداد</th>
+            <th>جمع</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of order.items">
+            <td>{{ item.title }}</td>
+            <td>{{ item.price | number }} تومان</td>
+            <td>{{ item.quantity }}</td>
+            <td class="amount">{{ (item.price * item.quantity) | number }} تومان</td>
+          </tr>
+          </tbody>
+          <tfoot>
+          <tr>
+            <td colspan="3" class="text-left">جمع جزء</td>
+            <td class="amount">{{ order.subtotal | number }} تومان</td>
+          </tr>
+          <tr *ngIf="order.shippingCost">
+            <td colspan="3" class="text-left">هزینه ارسال</td>
+            <td class="amount">{{ order.shippingCost | number }} تومان</td>
+          </tr>
+          <tr *ngIf="order.tax">
+            <td colspan="3" class="text-left">مالیات</td>
+            <td class="amount">{{ order.tax | number }} تومان</td>
+          </tr>
+          <tr *ngIf="order.discount">
+            <td colspan="3" class="text-left">تخفیف</td>
+            <td class="amount discount">-{{ order.discount | number }} تومان</td>
+          </tr>
+          <tr class="total-row">
+            <td colspan="3" class="text-left"><strong>مبلغ قابل پرداخت</strong></td>
+            <td class="total-amount"><strong>{{ order.total | number }} تومان</strong></td>
+          </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="action-buttons" *ngIf="order.status === 'pending'">
+      <button class="btn-pay" (click)="payOrder()">پرداخت سفارش</button>
+      <button class="btn-cancel" (click)="cancelOrder()">لغو سفارش</button>
+    </div>
+  </div>
+</div>

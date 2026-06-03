@@ -1,0 +1,204 @@
+<div class="addresses-container">
+  <div class="page-header">
+    <h3 class="panel-title">آدرس‌های من</h3>
+    <button class="btn-add" (click)="openAddModal()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+        <line x1="12" y1="5" x2="12" y2="19"/>
+        <line x1="5" y1="12" x2="19" y2="12"/>
+      </svg>
+      آدرس جدید
+    </button>
+
+  </div>
+
+  <div class="loading-overlay" *ngIf="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="addresses-grid" *ngIf="!loading">
+    <div class="address-card" [class.default]="address.isDefault" *ngFor="let address of addresses; trackBy: trackById">
+      <div class="address-badge" *ngIf="address.isDefault">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        پیش‌فرض
+      </div>
+      <div class="address-content">
+        <div class="address-name">{{ address.fullName }}</div>
+        <div class="address-detail">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          {{ address.province }} - {{ address.city }}
+        </div>
+        <div class="address-detail">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          {{ address.address }}
+        </div>
+        <div class="address-detail">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="M22 7l-10 5L2 7"/>
+          </svg>
+          کد پستی: {{ address.postalCode }}
+        </div>
+        <div class="address-detail">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+            <line x1="12" y1="18" x2="12" y2="18"/>
+          </svg>
+          تلفن: {{ address.phone }}
+        </div>
+      </div>
+      <div class="address-actions">
+        <button class="btn-edit-address" (click)="openEditModal(address)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <path d="M17 3l4 4-7 7H10v-4l7-7z"/>
+            <path d="M4 20h16"/>
+          </svg>
+          ویرایش
+        </button>
+        <button class="btn-delete-address" (click)="deleteAddress(address._id)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <polyline points="3 6 5 6 21 6"/>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+          </svg>
+          حذف
+        </button>
+        <button class="btn-default-address" *ngIf="!address.isDefault" (click)="setDefaultAddress(address._id)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          تنظیم به عنوان پیش‌فرض
+        </button>
+      </div>
+    </div>
+
+    <div class="empty-addresses" *ngIf="addresses.length === 0">
+      <div class="empty-icon">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+      </div>
+      <h3>هیچ آدرسی ثبت نشده است</h3>
+      <p>برای ثبت اولین آدرس خود روی دکمه "آدرس جدید" کلیک کنید</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="showAddModal" (click)="closeModals()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>افزودن آدرس جدید</h3>
+      <button class="modal-close" (click)="closeModals()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label>نام و نام خانوادگی *</label>
+          <input type="text" class="form-control" [(ngModel)]="addressModel.fullName" placeholder="نام کامل گیرنده">
+        </div>
+        <div class="form-group">
+          <label>شماره موبایل *</label>
+          <input type="tel" class="form-control" [(ngModel)]="addressModel.phone" placeholder="09123456789">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>استان *</label>
+          <input type="text" class="form-control" [(ngModel)]="addressModel.province" placeholder="مثال: تهران">
+        </div>
+        <div class="form-group">
+          <label>شهر *</label>
+          <input type="text" class="form-control" [(ngModel)]="addressModel.city" placeholder="مثال: تهران">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>آدرس کامل *</label>
+        <textarea class="form-control" rows="3" [(ngModel)]="addressModel.address" placeholder="خیابان، کوچه، پلاک..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>کد پستی *</label>
+        <input type="text" class="form-control" [(ngModel)]="addressModel.postalCode" placeholder="کد پستی 10 رقمی">
+      </div>
+      <div class="form-group checkbox-group">
+        <label>
+          <input type="checkbox" [(ngModel)]="addressModel.isDefault">
+          <span>تنظیم به عنوان آدرس پیش‌فرض</span>
+        </label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" (click)="closeModals()">انصراف</button>
+      <button class="btn-primary" (click)="createAddress()" [disabled]="submitted">
+        {{ submitted ? 'در حال ثبت...' : 'ثبت آدرس' }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="showEditModal" (click)="closeModals()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>ویرایش آدرس</h3>
+      <button class="modal-close" (click)="closeModals()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label>نام و نام خانوادگی *</label>
+          <input type="text" class="form-control" [(ngModel)]="addressModel.fullName">
+        </div>
+        <div class="form-group">
+          <label>شماره موبایل *</label>
+          <input type="tel" class="form-control" [(ngModel)]="addressModel.phone">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>استان *</label>
+          <input type="text" class="form-control" [(ngModel)]="addressModel.province">
+        </div>
+        <div class="form-group">
+          <label>شهر *</label>
+          <input type="text" class="form-control" [(ngModel)]="addressModel.city">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>آدرس کامل *</label>
+        <textarea class="form-control" rows="3" [(ngModel)]="addressModel.address"></textarea>
+      </div>
+      <div class="form-group">
+        <label>کد پستی *</label>
+        <input type="text" class="form-control" [(ngModel)]="addressModel.postalCode">
+      </div>
+      <div class="form-group checkbox-group">
+        <label>
+          <input type="checkbox" [(ngModel)]="addressModel.isDefault">
+          <span>تنظیم به عنوان آدرس پیش‌فرض</span>
+        </label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" (click)="closeModals()">انصراف</button>
+      <button class="btn-primary" (click)="updateAddress()" [disabled]="submitted">
+        {{ submitted ? 'در حال ویرایش...' : 'ویرایش آدرس' }}
+      </button>
+    </div>
+  </div>
+</div>

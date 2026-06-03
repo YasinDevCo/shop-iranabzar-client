@@ -1,0 +1,30 @@
+.products-grid {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  justify-content: space-between;
+  scroll-snap-type: x mandatory;
+  width: 100%;
+  padding: 20px;
+}
+
+.products-grid > * {
+  flex: 0 0 260px;
+  scroll-snap-align: start;
+  height: auto;
+}
+
+/* اسکرول بار سفارشی */
+.products-grid::-webkit-scrollbar {
+  height: 4px;
+}
+
+.products-grid::-webkit-scrollbar-track {
+  background: #e9ecef;
+  border-radius: 10px;
+}
+
+.products-grid::-webkit-scrollbar-thumb {
+  background: #ff5722;
+  border-radius: 10px;
+}

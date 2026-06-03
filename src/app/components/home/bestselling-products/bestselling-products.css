@@ -1,0 +1,150 @@
+section {
+  width: 100%;
+  height: auto;
+  gap: 40px;
+  background: var(--secondary-coral);
+  border-radius: 20px;
+  padding: 30px 50px 50px;
+}
+
+.content {
+  align-items: flex-start;
+  color: white;
+}
+
+.content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.top img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-95%, -50%);
+    height: auto;
+    z-index: 1000;
+
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.bottom app-product-card {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ========== ریسپانسیو ========== */
+
+/* تبلت (768px - 1080px) */
+@media (max-width: 1080px) {
+  section {
+    padding: 30px;
+  }
+
+  .bottom {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 32px;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 10px;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+
+  }
+
+  .bottom app-product-card {
+    flex: 0 0 280px;
+    scroll-snap-align: start;
+  }
+
+  /* اسکرول بار سفارشی */
+  .bottom::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .bottom::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+  }
+
+  .bottom::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 10px;
+  }
+
+  .content h2 {
+    font-size: 1.5rem;
+  }
+
+
+}
+
+/* موبایل (480px - 768px) */
+@media (max-width: 768px) {
+  .bottom{
+    padding: 20px;
+  }
+  section {
+    padding: 20px;
+  }
+
+    .top img {
+      display: none;
+    }
+
+
+  .content {
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    gap: 5px;
+  }
+
+  .content h2 {
+    font-size: 1.3rem;
+  }
+
+
+
+  .bottom app-product-card {
+    flex: 0 0 240px;
+  }
+
+  .btn-primary-lighter {
+    width: 100%;
+  }
+}
+
+/* موبایل کوچک (زیر 480px) */
+@media (max-width: 480px) {
+  section {
+    padding: 16px;
+  }
+.bottom{
+  gap: 48px;
+}
+  .content h2 {
+    font-size: 1.1rem;
+  }
+
+  .bottom app-product-card {
+    flex: 0 0 220px;
+  }
+
+
+}

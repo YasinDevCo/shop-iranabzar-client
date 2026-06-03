@@ -1,0 +1,24 @@
+<!-- ==================== Category Section ==================== -->
+<div class=" category-container container">
+  <div class="category-wrapper" [class.mobile-scroll]="isMobileView">
+    <div class="category-list">
+      <!-- Category Items -->
+      <div
+        *ngFor="let category of categories"
+        class="category-item"
+        (click)="selectCategory(category.id, category.name)"
+      >
+        <div class="category-icon" [class.active]="category.id === selectedCategoryId">
+          <img
+            [ngSrc]="category.icon"
+            [alt]="category.name"
+            width="40"
+            height="40"
+            priority
+          >
+        </div>
+        <span class="category-name">{{ category.name }}</span>
+      </div>
+    </div>
+  </div>
+</div>

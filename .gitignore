@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+/tmp
+/out-tsc
+
+# Angular cache
+/.angular/cache
+
+# Environment (production)
+src/environments/environment.prod.ts
+
+# IDE
+.vscode/
+.idea/
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Coverage
+coverage/
+__screenshots__/
+
+# Misc
+*.swp
+*.swo
+*~
+
+# SSL
+*.pem
+*.key
+*.crt

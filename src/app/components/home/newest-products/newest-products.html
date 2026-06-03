@@ -1,0 +1,24 @@
+<div class="container">
+  <section class="flex justify-between items-center gap-3">
+    <div class="right">
+      <img src="/qq%201.png" alt="image">
+    </div>
+    <div class="left">
+      <div class="cards" *ngIf="!loading">
+        <app-product-card
+          *ngFor="let product of products"
+          [product]="product"
+          cardVariant="default"
+          (addToCart)="addToCart($event)">
+        </app-product-card>
+
+    </div>
+    <div class="content flex flex-col gap-1 py-3 mt-2">
+      <h2>جدیدترین محصول های شرکت فلان</h2>
+      <p>جدیدترین محصول های شرکت فلان جدیدترین محصول های شرکت فلان جدیدترین محصول های شرکت فلان جدیدترین محصول های شرکت
+        فلان جدیدترین محصول های شرکت فلان</p>
+      <button class="btn btn-primary-lighter btn-lg">مشاهده محصولات</button>
+    </div>
+</div>
+</section>
+</div>

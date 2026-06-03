@@ -1,0 +1,55 @@
+<div class="payment-verify-page">
+  <div class="container">
+    <div class="verify-card" *ngIf="loading">
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <h3>در حال تایید پرداخت...</h3>
+        <p>لطفاً چند لحظه صبر کنید</p>
+      </div>
+    </div>
+
+    <div class="verify-card success" *ngIf="!loading && success">
+      <div class="success-icon">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 6L9 17l-5-5"/>
+        </svg>
+      </div>
+      <h2>پرداخت موفق</h2>
+      <p>{{ message }}</p>
+      <div class="payment-details" *ngIf="paymentData">
+        <div class="detail-row">
+          <span>کد تراکنش:</span>
+          <span>{{ paymentData.transactionCode }}</span>
+        </div>
+        <div class="detail-row">
+          <span>مبلغ پرداختی:</span>
+          <span>{{ paymentData.amount | number }} تومان</span>
+        </div>
+        <div class="detail-row">
+          <span>تاریخ پرداخت:</span>
+          <span>{{ paymentData.paidAt | date:'yyyy/MM/dd HH:mm' }}</span>
+        </div>
+      </div>
+      <div class="action-buttons">
+        <button class="btn btn-primary" (click)="goToOrders()">مشاهده سفارشات</button>
+        <button class="btn btn-outline" (click)="goToHome()">بازگشت به صفحه اصلی</button>
+      </div>
+    </div>
+
+    <div class="verify-card error" *ngIf="!loading && error">
+      <div class="error-icon">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12" y2="16"/>
+        </svg>
+      </div>
+      <h2>پرداخت ناموفق</h2>
+      <p>{{ message }}</p>
+      <div class="action-buttons">
+        <button class="btn btn-primary" routerLink="/cart">بازگشت به سبد خرید</button>
+        <button class="btn btn-outline" (click)="goToHome()">بازگشت به صفحه اصلی</button>
+      </div>
+    </div>
+  </div>
+</div>

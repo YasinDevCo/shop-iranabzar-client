@@ -1,0 +1,4 @@
+.main-content {
+  min-height: calc(100vh - 120px); /* ارتفاع هدر و فوتر رو کم کن */
+  padding: 20px;
+}
