@@ -1,6 +1,6 @@
 // utilities/api-address-util.ts
 export class ApiAddress {
-  static baseAddress: string = "http://localhost:5000/api";
+  static baseAddress: string = "https://shop-iranabzar-api.onrender.com/api";
 
   // Auth
   static login: string = "/auth/login";
