@@ -314,32 +314,32 @@
 }
 
 /* موبایل کوچک */
-@media (max-width: 480px) {
-  .product-card__image {
-    padding: 12px;
-  }
+/*@media (max-width: 480px) {*/
+/*  .product-card__image {*/
+/*    padding: 12px;*/
+/*  }*/
 
-  .product-card__content {
-    padding: 12px;
-    gap: 8px;
-  }
+/*  .product-card__content {*/
+/*    padding: 12px;*/
+/*    gap: 8px;*/
+/*  }*/
 
-  .product-card__title {
-    font-size: 0.85rem;
-    min-height: 2.2rem;
-  }
+/*  .product-card__title {*/
+/*    font-size: 0.85rem;*/
+/*    min-height: 2.2rem;*/
+/*  }*/
 
-  .product-card__description {
-    font-size: 0.65rem;
-    min-height: 1.8rem;
-  }
+/*  .product-card__description {*/
+/*    font-size: 0.65rem;*/
+/*    min-height: 1.8rem;*/
+/*  }*/
 
-  .product-card__price-value {
-    font-size: 0.5rem;
-  }
+/*  .product-card__price-value {*/
+/*    font-size: 0.5rem;*/
+/*  }*/
 
-  .product-card__btn {
-    padding: 6px 0;
-    font-size: 0.6rem;
-  }
-}
+/*  .product-card__btn {*/
+/*    padding: 6px 0;*/
+/*    font-size: 0.6rem;*/
+/*  }*/
+/*}*/
