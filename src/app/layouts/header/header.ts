@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { AccountService } from '../../services/account.service';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -9,7 +9,6 @@ import { FormsModule } from '@angular/forms';
   imports: [
     RouterLink,
     NgIf,
-    NgTemplateOutlet,
     FormsModule
   ],
   templateUrl: './header.html',
@@ -19,14 +18,14 @@ export class Header {
   activeLink: string = '/';
   searchQuery: string = '';
   isDrawerOpen: boolean = false;
-  
+
   // برای دیباگ - وضعیت لاگین
   isUserLoggedIn: boolean = false;
 
   constructor(private router: Router, public account: AccountService) {
     // چک کردن وضعیت لاگین
     this.checkLoginStatus();
-    
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.activeLink = event.url;
@@ -45,7 +44,7 @@ export class Header {
   toggleDrawer() {
     this.isDrawerOpen = !this.isDrawerOpen;
     console.log('Drawer toggled:', this.isDrawerOpen); // برای دیباگ
-    
+
     if (this.isDrawerOpen) {
       document.body.style.overflow = 'hidden';
     } else {
