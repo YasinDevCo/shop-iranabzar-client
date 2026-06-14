@@ -9,7 +9,7 @@ import { environment } from '../environments/environment';
 export class UploadService {
   private apiUrl = `${environment.apiUrl}/api/upload`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   uploadImage(file: File): Observable<any> {
     const formData = new FormData();
@@ -18,7 +18,8 @@ export class UploadService {
     // اضافه کردن reportProgress برای نمایش درصد آپلود
     return this.http.post(this.apiUrl, formData, {
       reportProgress: true,
-      observe: 'body'
+      observe: 'body',
+      withCredentials: true
     });
   }
 }
