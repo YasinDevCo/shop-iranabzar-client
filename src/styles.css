@@ -731,4 +731,7 @@ body {
   .toast {
     min-width: auto !important;
   }
+  .container {
+    --container-padding: 0;
+  }
 }

@@ -2,3 +2,8 @@
   min-height: calc(100vh - 120px); /* ارتفاع هدر و فوتر رو کم کن */
   padding: 20px;
 }
+@media (max-width: 768px) {
+  .main-content {
+    padding: 10px;
+  }
+}

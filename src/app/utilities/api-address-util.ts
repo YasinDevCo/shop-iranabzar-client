@@ -1,6 +1,7 @@
 // utilities/api-address-util.ts
 export class ApiAddress {
-  static baseAddress: string = "https://shop-iranabzar-api.onrender.com/api";
+  // static baseAddress: string = "https://shop-iranabzar-api.onrender.com/api";
+  static baseAddress: string = "http://localhost:5000/api";
 
   // Auth
   static login: string = "/auth/login";
@@ -14,10 +15,9 @@ export class ApiAddress {
   static getMessageById: string = "/contact/:id";
   static deleteMessage: string = "/contact/:id";
 
-
   // User
-  static getOneUserById: string = "/user/getOne/:id";
   static getAllUsers: string = "/user/getAll";
+  static getOneUserById: string = "/user/:id";  // اضافه شد
   static deleteUser: string = "/user/delete/:id";
   static updateUser: string = "/user/update/:id";
   static addUser: string = "/user/add";
@@ -88,4 +88,6 @@ export class ApiAddress {
   static addToWishlist: string = "/wishlist/add/:productId";
   static removeFromWishlist: string = "/wishlist/remove/:productId";
   static clearWishlist: string = "/wishlist/clear";
+
+  static upload: string = "/upload"
 }
